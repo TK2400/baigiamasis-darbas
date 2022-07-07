@@ -8,26 +8,13 @@ export default function PostRegistrationForm() {
     const [lname, setLname] = useState('')
     const [email, setEmail] = useState('')
     const [age, setAge] = useState('')
+    const [isPending, setIsPending] = useState(false)
 
-
-    // const [isEdit, setIsEdit] = useState(false)
-
-    // function handle(e) {
-    //     console.log(e)
-    //     const newData = { ...data }
-    //     newData[e.target.id] = e.target.value
-    //     setData(newData)
-    //     console.log(newData)
-    // }
-
-    // function submit(e) {
-    //     e.preventDefault()
-    // }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = { name, lname, email, age }
-        console.log(form)
+        setIsPending(true)
         setName('')
         setLname('')
         setEmail('')
@@ -39,7 +26,8 @@ export default function PostRegistrationForm() {
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(form)
         }).then(() => {
-            console.log("krauna")
+            // console.log("krauna")
+            setIsPending(false)
         })
     }
 
@@ -68,7 +56,7 @@ export default function PostRegistrationForm() {
 
                 <input
                     placeholder="el.pastas"
-                    type="email"
+                    type="text"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -81,7 +69,8 @@ export default function PostRegistrationForm() {
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
                 />
-                <button> Itraukti dalyvi i sarasa</button>
+                {!isPending && <button> Itraukti dalyvi i sarasa</button>}
+                {isPending && <button disabled> Kraunama...</button>}
 
             </form>
         </div >
