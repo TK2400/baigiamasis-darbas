@@ -8,7 +8,7 @@ export default function PostRegistrationForm() {
     const [lname, setLname] = useState('')
     const [email, setEmail] = useState('')
     const [age, setAge] = useState('')
-  
+
 
     // const [isEdit, setIsEdit] = useState(false)
 
@@ -24,19 +24,30 @@ export default function PostRegistrationForm() {
     //     e.preventDefault()
     // }
 
-const handleSubmit=(e) => {
-    e.preventDefault()
-    const form = {name, lname, email, age}
-    console.log(form)
-    setName('')
-    setLname('')
-    setEmail('')
-    setAge('')
-}
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const form = { name, lname, email, age }
+        console.log(form)
+        setName('')
+        setLname('')
+        setEmail('')
+        setAge('')
+
+        fetch('http://127.0.0.1:9000/users', {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify(form)
+        }).then(() => {
+            console.log("krauna")
+        })
+    }
+
+
 
 
     return (
-        <div className='form'>
+        <div className='form' >
             <form onSubmit={handleSubmit}>
                 <input
                     placeholder="Vardas"
@@ -44,7 +55,7 @@ const handleSubmit=(e) => {
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    
+
                 />
 
                 <input
@@ -71,7 +82,7 @@ const handleSubmit=(e) => {
                     onChange={(e) => setAge(e.target.value)}
                 />
                 <button> Itraukti dalyvi i sarasa</button>
-               
+
             </form>
         </div >
 
