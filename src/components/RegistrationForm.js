@@ -28,7 +28,10 @@ const handleSubmit=(e) => {
     e.preventDefault()
     const form = {name, lname, email, age}
     console.log(form)
-
+    setName('')
+    setLname('')
+    setEmail('')
+    setAge('')
 }
 
 
