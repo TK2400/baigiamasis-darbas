@@ -24,16 +24,24 @@ export default function PostRegistrationForm() {
     //     e.preventDefault()
     // }
 
+const handleSubmit=(e) => {
+    e.preventDefault()
+    const form = {name, lname, email, age}
+    console.log(form)
+
+}
+
 
     return (
         <div className='form'>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input
                     placeholder="Vardas"
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    
                 />
 
                 <input
@@ -60,11 +68,7 @@ export default function PostRegistrationForm() {
                     onChange={(e) => setAge(e.target.value)}
                 />
                 <button> Itraukti dalyvi i sarasa</button>
-                <p> {name}</p>
-                <p> {lname}</p>
-                <p> {email}</p>
-                <p> {age}</p>
-
+               
             </form>
         </div >
 
