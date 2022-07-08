@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './registrationForm.css'
 
 
 
@@ -26,26 +27,21 @@ export default function PostRegistrationForm() {
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(form)
         }).then(() => {
-            // console.log("krauna")
             setIsPending(false)
         })
     }
 
-
-
-
     return (
-        <div className='form' >
+        <div className='formHolder'>
             <form onSubmit={handleSubmit}>
-                <input
+                               <input
                     placeholder="Vardas"
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-
                 />
-
+            
                 <input
                     placeholder="Pavarde"
                     type="text"
@@ -53,24 +49,25 @@ export default function PostRegistrationForm() {
                     value={lname}
                     onChange={(e) => setLname(e.target.value)}
                 />
-
+              
                 <input
                     placeholder="el.pastas"
-                    type="text"
+                    type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-
+              
                 <input
+
                     placeholder="amzius m."
                     type="number"
                     required
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
                 />
-                {!isPending && <button> Itraukti dalyvi i sarasa</button>}
-                {isPending && <button disabled> Kraunama...</button>}
+                {!isPending && <input type ="submit" value= "Užregistruoti asmenį į egzaminą"/>}
+                {isPending && <input type ="submit" disabled value="Kraunama..."/>}
 
             </form>
         </div >

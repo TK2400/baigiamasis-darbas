@@ -4,9 +4,7 @@ import "./App.css"
 import UserHeader from "./components/Header";
 import RegistrationForm from "./components/RegistrationForm";
 // import User from "./components/user";
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import Button from 'react-bootstrap/Button';
-// import Form from 'react-bootstrap/Button';
+
 
 
 export default function App() {
@@ -28,17 +26,7 @@ export default function App() {
     return (
         <div className="container">
             <UserHeader />
-            <RegistrationForm/>
-           
-            {/* <div className="usersList" >
-
-                {users.filter(user => {
-                    return user.name.first.startsWith(filter)
-                }).map((user) => (
-                    <User user={user}
-                        key={user.name.first + user.name.last} />
-                ))}
-            </div> */}
+            <RegistrationForm />
         </div>
     );
 }

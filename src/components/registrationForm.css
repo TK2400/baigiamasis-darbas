@@ -1,0 +1,30 @@
+.formHolder *{
+    width: 90%;
+    border-radius: 3px;
+    border-width: 1px;
+ 
+}
+
+.formHolder input{
+    margin-bottom: 10px;
+    padding: 5px
+ 
+}
+
+.formHolder {
+    width:90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input[type=submit]:hover {
+    background-color: #c4d6c5;
+
+}
+
+.formHolder form {
+    width: 90%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}

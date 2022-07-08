@@ -1,11 +1,13 @@
 .header img {
-    margin-top: 50px;
-    margin-bottom: 20px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    margin-left: 20px;
 }
 
 .title {
     background-color: antiquewhite;
 }
-.title h3{
-    padding: 20px;
+.title p{
+    padding: 10px 15px 10px 15px;
+    font-weight: 500;
 }

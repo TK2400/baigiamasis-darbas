@@ -8,7 +8,7 @@ export default function UserHeader() {
             <div>
                 <img src="https://codeacademy.lt/wp-content/themes/codeacademy/dist/images/codeacademy-black.svg" className='header__logo' alt='logo' />
                 <div className='title'>
-                    <h3> VIGI13 registracija į egzaminą </h3>
+                    <p> VIGI13 registracija į egzaminą </p>
                 </div>
             </div>
         </header>

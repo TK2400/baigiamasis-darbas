@@ -5,70 +5,8 @@
 }
 
 body {
+    width: 100%;
     background-color: #eaeaea;
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
   }
-
-.usersList {
-    width: 90%;
-    text-align: center;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr
-
-
-}
-
-.userFoto {
-    width: auto;
-    height: 320px;
-    background-repeat:no-repeat;
-    background-size: cover;
-    display:flex;
-    margin:10px
-}
-
-.nameLine {
-    height: 20px;
-    padding: 5px;
-    color: white;
-    background-color: blue;
-    opacity: 0.5;
-    align-self: flex-end;
-    flex-grow: 1;
-
-}
-
-.stretch {
-    align-self: stretch;
-    flex-grow: 1;
-    height: 100%;
-    padding: 0px;
-   
-}
-
-.userHeader {
-    height: 50px;
-    width: 1200px;
-    background-color: rgb(208, 171, 243);
-    color: black;
-    display: flex;
-    align-items: center;
-    
-
-
-}
-
-.userHeader ul {
-    display: flex;
-}
-.userHeader li {
-    list-style: none;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-.userHeader form,input, button  {
-    margin-left: 20px;
-}
-  
-  
