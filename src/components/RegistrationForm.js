@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './registrationForm.css'
+// import PartcipantList from './ParticipantList'
 
 
 
@@ -10,6 +11,9 @@ export default function PostRegistrationForm() {
     const [email, setEmail] = useState('')
     const [age, setAge] = useState('')
     const [isPending, setIsPending] = useState(false)
+    // const [users, setUsers] = useState(() => {
+    //     return []
+    // })
 
 
     const handleSubmit = (e) => {
@@ -30,6 +34,13 @@ export default function PostRegistrationForm() {
             setIsPending(false)
         })
     }
+
+    // useEffect(() => {
+    //     fetch("http://127.0.0.1:9000/users")
+    //         .then((resp) => resp.json())
+    //         .then((result) => setUsers(result))
+    // }, [])
+
 
     return (
         <div className='formHolder'>
