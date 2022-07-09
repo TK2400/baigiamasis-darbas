@@ -2,7 +2,7 @@
 // import { useEffect, useState } from "react";
 import "./App.css"
 import UserHeader from "./components/Header";
-import ParticipantList from "./components/ParticipantList";
+// import ParticipantList from "./components/ParticipantList";
 import RegistrationForm from "./components/RegistrationForm";
 
 
@@ -30,7 +30,7 @@ export default function App() {
         <div className="container">
             <UserHeader />
             <RegistrationForm />
-            <ParticipantList />
+            {/* <ParticipantList /> */}
           
             {/* <section>
                 {users.map((user) => (

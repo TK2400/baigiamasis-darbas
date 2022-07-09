@@ -5,18 +5,16 @@ import './registrationForm.css'
 
 
 
+
 export default function PostRegistrationForm() {
     const [name, setName] = useState('')
     const [lname, setLname] = useState('')
     const [email, setEmail] = useState('')
     const [age, setAge] = useState('')
     const [isPending, setIsPending] = useState(false)
-    // const [users, setUsers] = useState(() => {
-    //     return []
-    // })
+    const [list, setList] = useState([])
 
-
-    const handleSubmit = (e) => {
+    function handleSubmit(e) {
         e.preventDefault()
         const form = { name, lname, email, age }
         setIsPending(true)
@@ -31,28 +29,34 @@ export default function PostRegistrationForm() {
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(form)
         }).then(() => {
+            list.push(form)
+            console.log(form)
             setIsPending(false)
         })
     }
 
-    // useEffect(() => {
-    //     fetch("http://127.0.0.1:9000/users")
-    //         .then((resp) => resp.json())
-    //         .then((result) => setUsers(result))
-    // }, [])
-
+    useEffect(() => {
+        fetch("http://127.0.0.1:9000/users")
+            .then((resp) => resp.json())
+            .then((data) => {
+                setList(data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [])
 
     return (
         <div className='formHolder'>
             <form onSubmit={handleSubmit}>
-                               <input
+                <input
                     placeholder="Vardas"
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-            
+
                 <input
                     placeholder="Pavarde"
                     type="text"
@@ -60,15 +64,15 @@ export default function PostRegistrationForm() {
                     value={lname}
                     onChange={(e) => setLname(e.target.value)}
                 />
-              
+
                 <input
                     placeholder="el.pastas"
-                    type="email"
+                    type="text"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-              
+
                 <input
 
                     placeholder="amzius m."
@@ -77,10 +81,16 @@ export default function PostRegistrationForm() {
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
                 />
-                {!isPending && <input type ="submit" value= "Užregistruoti asmenį į egzaminą"/>}
-                {isPending && <input type ="submit" disabled value="Kraunama..."/>}
+                {!isPending && <input type="submit" value="Užregistruoti asmenį į egzaminą" />}
+                {isPending && <input type="submit" disabled value="Kraunama..." />}
 
             </form>
+            <div>
+
+                {list.map((user) => (
+                    <div key={user.name + user.number}> {user.name} {user.lname}</div>))}
+            </div>
+
         </div >
 
     )
