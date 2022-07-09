@@ -94,7 +94,7 @@ export default function PostRegistrationForm() {
                     {list.map((user, index) => (
                         <Li
                             key={index}
-                            // object={user._id}
+                            object={user._id}
                             index={index}
                             nameShort={user.name[0]}
                             name={user.name}

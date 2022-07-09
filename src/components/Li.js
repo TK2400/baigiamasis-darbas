@@ -11,13 +11,16 @@ export default function Li(props) {
         else { setButtonClicked(false) }
     }
 
-    // function handleDelete(id) {
-    //     fetch(`http://127.0.0.1:9000/users/${id}`, {
-    //         method: 'DELETE'
-    //     }).catch((error) => {
-    //         console.log(error)
-    //     })
-    // }
+    function handleDelete(id) {
+        fetch(`http://127.0.0.1:9000/users/${id}`, {
+            method: 'DELETE'
+        }).then((result) => {
+            result.json()
+                .then((resp) => {
+                    console.warn(result)
+                })
+        })
+    }
 
 
     return (
@@ -28,7 +31,7 @@ export default function Li(props) {
                 <button onClick={showMore}>
                     {buttonClicked ? "Mažiau" : "Daugiau"}
                 </button>
-                {/* <button onClick={handleDelete(props.object)}> Trinti </button> */}
+                <button onClick={()=>handleDelete(props.object)}> Trinti </button>
             </div>
 
 
