@@ -11,13 +11,27 @@ export default function Li(props) {
         else { setButtonClicked(false) }
     }
 
-    return (
-        <li key={`${props.index}`}> {`${props.name} ${props.lname}`}
-            <button onClick={showMore}>
-                {buttonClicked ? "show less" : "show more"}
-            </button>
+    // function handleDelete(id) {
+    //     fetch(`http://127.0.0.1:9000/users/${id}`, {
+    //         method: 'DELETE'
+    //     }).catch((error) => {
+    //         console.log(error)
+    //     })
+    // }
 
-            {buttonClicked && <div> {props.email}, {`amzius-${props.age}`}</div>}
+
+    return (
+        <li key={`${props.index}`}>
+            {!buttonClicked && <div className="showMore"> {`${props.nameShort}. ${props.lname}`}</div>}
+            {buttonClicked && <div className="showMore">  {`${props.name} ${props.lname}, ${props.email}, amzius ${props.age}m.`}</div>}
+            <div className="buttonHolder">
+                <button onClick={showMore}>
+                    {buttonClicked ? "Mažiau" : "Daugiau"}
+                </button>
+                {/* <button onClick={handleDelete(props.object)}> Trinti </button> */}
+            </div>
+
+
 
         </li>
     )

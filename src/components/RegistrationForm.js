@@ -34,6 +34,8 @@ export default function PostRegistrationForm() {
             list.push(form)
             console.log(form)
             setIsPending(false)
+        }).catch((error) => {
+            console.log(error)
         })
     }
 
@@ -48,15 +50,7 @@ export default function PostRegistrationForm() {
             })
     }, [])
 
-    // function showMore() {
-    //     if (!buttonClicked) {
-    //         setButtonClicked(true)
-    //     }
-    //     else { setButtonClicked(false) }
-    // }
-
-
-    return (
+     return (
         <div className='formHolder'>
             <form onSubmit={handleSubmit}>
                 <input
@@ -86,7 +80,7 @@ export default function PostRegistrationForm() {
                 <input
 
                     placeholder="amzius m."
-                    type="number"
+                    type="text"
                     required
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
@@ -99,7 +93,10 @@ export default function PostRegistrationForm() {
                 <ol>
                     {list.map((user, index) => (
                         <Li
+                            key={index}
+                            // object={user._id}
                             index={index}
+                            nameShort={user.name[0]}
                             name={user.name}
                             lname={user.lname}
                             email={user.email}
