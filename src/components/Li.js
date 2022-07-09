@@ -12,15 +12,15 @@ export default function Li(props) {
     }
 
     return (
-    <li key={props.index}> {props.name} {props.lname}
-<button onClick={showMore}>
-    {buttonClicked ? "show less" : "show more"}
-</button>
+        <li key={`${props.index}`}> {`${props.name} ${props.lname}`}
+            <button onClick={showMore}>
+                {buttonClicked ? "show less" : "show more"}
+            </button>
 
-{buttonClicked && <div> {props.email}, {props.age}</div>}
+            {buttonClicked && <div> {props.email}, {`amzius-${props.age}`}</div>}
 
-</li>
-        )
+        </li>
+    )
 }
 
 

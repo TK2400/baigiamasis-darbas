@@ -99,11 +99,11 @@ export default function PostRegistrationForm() {
                 <ol>
                     {list.map((user, index) => (
                         <Li
-                            index="index"
-                            name="user.name"
-                            lname="user.lname"
-                            email="user.email"
-                            age="user.age" />
+                            index={index}
+                            name={user.name}
+                            lname={user.lname}
+                            email={user.email}
+                            age={user.age} />
 
                     ))}
                 </ol>
