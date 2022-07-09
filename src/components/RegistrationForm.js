@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './registrationForm.css'
 // import PartcipantList from './ParticipantList'
+import Li from './Li'
 
 
 
@@ -13,6 +14,7 @@ export default function PostRegistrationForm() {
     const [age, setAge] = useState('')
     const [isPending, setIsPending] = useState(false)
     const [list, setList] = useState([])
+    // const [buttonClicked, setButtonClicked] = useState(false)
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -45,6 +47,14 @@ export default function PostRegistrationForm() {
                 console.log(error)
             })
     }, [])
+
+    // function showMore() {
+    //     if (!buttonClicked) {
+    //         setButtonClicked(true)
+    //     }
+    //     else { setButtonClicked(false) }
+    // }
+
 
     return (
         <div className='formHolder'>
@@ -85,13 +95,21 @@ export default function PostRegistrationForm() {
                 {isPending && <input type="submit" disabled value="Kraunama..." />}
 
             </form>
-            <div>
+            <div className='userHolder'>
+                <ol>
+                    {list.map((user, index) => (
+                        <Li
+                            index="index"
+                            name="user.name"
+                            lname="user.lname"
+                            email="user.email"
+                            age="user.age" />
 
-                {list.map((user) => (
-                    <div key={user.name + user.number}> {user.name} {user.lname}</div>))}
+                    ))}
+                </ol>
             </div>
-
         </div >
 
     )
 }
+

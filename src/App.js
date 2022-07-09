@@ -9,6 +9,7 @@ import RegistrationForm from "./components/RegistrationForm";
 
 
 
+
 export default function App() {
     // const [users, setUsers] = useState(() => {
     //     return []
@@ -28,6 +29,7 @@ export default function App() {
 
     return (
         <div className="container">
+        
             <UserHeader />
             <RegistrationForm />
             {/* <ParticipantList /> */}
