@@ -14,11 +14,13 @@ export default function PostRegistrationForm() {
     const [age, setAge] = useState('')
     const [isPending, setIsPending] = useState(false)
     const [list, setList] = useState([])
+
     // const [buttonClicked, setButtonClicked] = useState(false)
 
     function handleSubmit(e) {
         e.preventDefault()
         const form = { name, lname, email, age }
+
         setIsPending(true)
         setName('')
         setLname('')
@@ -31,17 +33,18 @@ export default function PostRegistrationForm() {
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(form)
         }).then(() => {
-            getUsers()
-            // list.push(form)
-            // console.log(form)
+            list.push(form)
             setIsPending(false)
         }).catch((error) => {
             console.log(error)
         })
     }
 
-function getUsers() {
-    fetch("http://127.0.0.1:9000/users")
+
+
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:9000/users")
             .then((resp) => resp.json())
             .then((data) => {
                 setList(data)
@@ -49,13 +52,17 @@ function getUsers() {
             .catch((error) => {
                 console.log(error)
             })
-}
-
-    useEffect(() => {
-        getUsers()
     }, [])
 
-     return (
+    function removeLi(index) {
+        const newList = list
+        newList.splice(index, 1)
+        setList([...newList])
+
+
+    }
+
+    return (
         <div className='formHolder'>
             <form onSubmit={handleSubmit}>
                 <input
@@ -97,15 +104,21 @@ function getUsers() {
             <div className='userHolder'>
                 <ol>
                     {list.map((user, index) => (
-                        <Li
-                            key={index}
-                            object={user._id}
-                            index={index}
-                            nameShort={user.name[0]}
-                            name={user.name}
-                            lname={user.lname}
-                            email={user.email}
-                            age={user.age} />
+                        <div key={index}>
+                            <Li
+                                list={list}
+                                // key={index}
+                                id={user._id}
+                                index={index}
+                                nameShort={user.name[0]}
+                                name={user.name}
+                                lname={user.lname}
+                                email={user.email}
+                                age={user.age}
+                            />
+                            <button onClick={() => removeLi(index)}> Trinti </button>
+                        </div>
+
 
                     ))}
                 </ol>
