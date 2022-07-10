@@ -31,16 +31,17 @@ export default function PostRegistrationForm() {
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(form)
         }).then(() => {
-            list.push(form)
-            console.log(form)
+            getUsers()
+            // list.push(form)
+            // console.log(form)
             setIsPending(false)
         }).catch((error) => {
             console.log(error)
         })
     }
 
-    useEffect(() => {
-        fetch("http://127.0.0.1:9000/users")
+function getUsers() {
+    fetch("http://127.0.0.1:9000/users")
             .then((resp) => resp.json())
             .then((data) => {
                 setList(data)
@@ -48,6 +49,10 @@ export default function PostRegistrationForm() {
             .catch((error) => {
                 console.log(error)
             })
+}
+
+    useEffect(() => {
+        getUsers()
     }, [])
 
      return (
