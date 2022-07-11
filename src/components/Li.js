@@ -14,7 +14,7 @@ export default function Li(props) {
 
     function handleDelete(id) {
         console.log(index)
-        
+
 
         fetch(`http://127.0.0.1:9000/users/${id}`, {
             method: 'DELETE'
@@ -23,17 +23,11 @@ export default function Li(props) {
             if (!res.ok) {
                 throw Error("could not fetch!")
             } else {
-                console.log("turi buti suveikes kodas auksciau")
-                console.log(list)
+                const newList = list
+                newList.splice(index, 1)
+                setList([...newList])
             }
-
         })
-            .then(() => {
-            
-            const newList = list
-            newList.splice(index, 1)
-            setList([...newList])
-            })
             .catch((error) => {
                 alert(error)
             });
