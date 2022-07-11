@@ -4,6 +4,7 @@ import { useState } from "react"
 export default function Li(props) {
     const { index, list, setList, userId, email, nameShort, name, lname, age } = props
     const [buttonClicked, setButtonClicked] = useState(false)
+    const [isPending, setIsPending] = useState(false)
 
     function showMore() {
         if (!buttonClicked) {
@@ -13,19 +14,22 @@ export default function Li(props) {
     }
 
     function handleDelete(id) {
-        console.log(index)
+        setIsPending(true)
 
 
         fetch(`http://127.0.0.1:9000/users/${id}`, {
             method: 'DELETE'
         }).then((res) => {
+            setButtonClicked(true)
             console.log(res)
             if (!res.ok) {
                 throw Error("could not fetch!")
             } else {
+                setButtonClicked(false)
                 const newList = list
                 newList.splice(index, 1)
                 setList([...newList])
+                setIsPending(false)
             }
         })
             .catch((error) => {
@@ -78,11 +82,13 @@ export default function Li(props) {
             {!buttonClicked && <div className="showMore"> {nameShort}. {lname}</div>}
             {buttonClicked && <div className="showMore">  {name} {lname}, {email}, amzius {age}m.</div>}
             <div className="buttonHolder">
-                <button onClick={showMore}>
+                {!isPending&& <button onClick={showMore}>
                     {buttonClicked ? "Mažiau" : "Daugiau"}
-                </button>
+                </button>}
+                {isPending&& ""}
 
-                <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId, index)}>delete</button>
+                {!isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId, index)}>Istrinti dalyvi</button>}
+                {isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId, index)} disabled> Dalyvis trinamas... </button>}
             </div>
 
 
