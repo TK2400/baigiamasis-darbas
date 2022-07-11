@@ -36,7 +36,7 @@ export default function PostRegistrationForm() {
             list.push(form)
             setIsPending(false)
         }).catch((error) => {
-            console.log(error)
+            console.log(error.message)
         })
     }
 
@@ -54,13 +54,47 @@ export default function PostRegistrationForm() {
             })
     }, [])
 
-    function removeLi(index) {
-        const newList = list
-        newList.splice(index, 1)
-        setList([...newList])
+
+    // const onDelete = async (id) => {
+    //     await fetch(`http://127.0.0.1:9000/users/${id}`, {
+    //       method: "DELETE",
+    //     })
+    //       .then((res) => {
+    //         if (res.status !== 200) {
+    //           return;
+    //         } else {
+    //           setList(
+    //             list.filter((user) => {
+    //               return user.id !== id;
+    //             })
+    //           );
+    //         }
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   };
 
 
-    }
+
+    // function removeLi(index) {
+    //     const newList = list
+    // const id = (newList[index]._id)
+    //     setIsPending(true)
+    //     fetch(`http://127.0.0.1:9000/users/${id}`, {
+    //         method: 'DELETE'
+    //     }).then(() => {
+    // newList.splice(index, 1)
+    // setList([...newList])
+    //         setIsPending(false)
+    //     }).catch((error) => {
+    //         console.log(error.message)
+    //     })
+
+
+
+
+
 
     return (
         <div className='formHolder'>
@@ -104,20 +138,22 @@ export default function PostRegistrationForm() {
             <div className='userHolder'>
                 <ol>
                     {list.map((user, index) => (
-                        <div key={index}>
-                            <Li
-                                list={list}
-                                // key={index}
-                                id={user._id}
-                                index={index}
-                                nameShort={user.name[0]}
-                                name={user.name}
-                                lname={user.lname}
-                                email={user.email}
-                                age={user.age}
-                            />
-                            <button onClick={() => removeLi(index)}> Trinti </button>
-                        </div>
+
+                        <Li
+                            list={list}
+                            key={index + name}
+                            userId={user._id}
+                            index={index}
+                            nameShort={user.name[0]}
+                            name={user.name}
+                            lname={user.lname}
+                            email={user.email}
+                            age={user.age}
+                            setList={setList}
+                            // ondelete={onDelete}
+                        />
+
+
 
 
                     ))}
