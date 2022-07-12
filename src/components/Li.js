@@ -99,12 +99,12 @@ export default function Li(props) {
 
 
 
+                {!editButtonClicked && <button style={{ marginTop: "10px" }} onClick={showModal}> Redaguoti dalyvio duomenis </button>}
+
+                {!isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId)}>Istrinti dalyvi</button>}
+                {isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId)} disabled> Dalyvis trinamas... </button>}
 
 
-                {!isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId, index)}>Istrinti dalyvi</button>}
-                {isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId, index)} disabled> Dalyvis trinamas... </button>}
-
-                <button style={{ marginTop: "10px" }} onClick={showModal}> Redaguoti dalyvio duomenis </button>
 
                 {editButtonClicked && <ModalProfile
                     list={list}

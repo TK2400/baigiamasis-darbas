@@ -40,9 +40,6 @@ export default function PostRegistrationForm() {
         })
     }
 
-
-
-
     useEffect(() => {
         fetch("http://127.0.0.1:9000/users")
             .then((resp) => resp.json())
@@ -53,47 +50,6 @@ export default function PostRegistrationForm() {
                 console.log(error)
             })
     }, [])
-
-
-    // const onDelete = async (id) => {
-    //     await fetch(`http://127.0.0.1:9000/users/${id}`, {
-    //       method: "DELETE",
-    //     })
-    //       .then((res) => {
-    //         if (res.status !== 200) {
-    //           return;
-    //         } else {
-    //           setList(
-    //             list.filter((user) => {
-    //               return user.id !== id;
-    //             })
-    //           );
-    //         }
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //   };
-
-
-
-    // function removeLi(index) {
-    //     const newList = list
-    // const id = (newList[index]._id)
-    //     setIsPending(true)
-    //     fetch(`http://127.0.0.1:9000/users/${id}`, {
-    //         method: 'DELETE'
-    //     }).then(() => {
-    // newList.splice(index, 1)
-    // setList([...newList])
-    //         setIsPending(false)
-    //     }).catch((error) => {
-    //         console.log(error.message)
-    //     })
-
-
-
-
 
 
     return (
@@ -152,7 +108,7 @@ export default function PostRegistrationForm() {
                             setList={setList}
                             setName={setName}
                             setLname={setLname}
-                            // ondelete={onDelete}
+                        // ondelete={onDelete}
                         />
 
 

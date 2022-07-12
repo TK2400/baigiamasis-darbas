@@ -1,81 +1,119 @@
-import { useState } from 'react'
+import { setTimeout, useState } from 'react'
 import './modal.css'
 
 
 
 export default function Modal(props) {
-    // let { index, list, setList, userId, email, nameShort, name, lname, age, setName } = props
     const [name, setName] = useState(props.name)
     const [lname, setLname] = useState(props.lname)
     const [email, setEmail] = useState(props.email)
-    const [age, setAge] = useState()
-    const [isPending, setIsPending] = useState(false)
-    const [modalOn, setModalOn] = useState(false)
+    const [age, setAge] = useState(props.age)
+    const [isEditing, setIsEditing] = useState(false)
+    const [isUpdated, setIsUpdated] = useState(false)
+const [timeout, setTimeout]=useState(0)
+    
 
-    function cancel() {
-        setModalOn(false)
-        return
+
+
+    // function cancel() {
+    //     setIsEditing(false)
+    //     return
+    // }
+
+
+    const userId = props.userId
+
+    function handleEdit(id) {
+        const form = { name, lname, email, age }
+        setIsEditing(true)
+        setIsUpdated(false)
+
+        fetch(`http://127.0.0.1:9000/user/${id}`, {
+            method: 'PUT',
+            mode: 'cors',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify(form)
+        }).then(() => {
+            setIsEditing(false)
+            setTimeout(function () {
+                setIsUpdated(true)
+            }, 3000);
+
+        }).catch((error) => {
+            console.log(error.message)
+        })
+
+
+
+
+
+
+
     }
 
-    // function showModal() {
-    //     if (!modalOn) {
-    //         setModalOn(true)
-    //     }
-    //     else {
-    //         setModalOn(false)
-    //     }
-    // }
 
     return (
         <div className="modal">
-            <div> V.</div>
-            <input
+            {!isUpdated ? <div>
+                <div> V.</div>
+                <input
 
-                type="text"
+                    type="text"
 
-                required
-                value={name}
-                onChange={(e) => {
-                    setName(e.target.value)
-                }}
-            />
-            <div> P.</div>
-            <input
+                    required
+                    value={name}
+                    onChange={(e) => {
+                        setName(e.target.value)
+                    }}
+                />
+                <div> P.</div>
+                <input
 
-                type="text"
+                    type="text"
 
-                required
-                value={lname}
-                onChange={(e) => {
-                    setLname(e.target.value)
-                }}
-            />
-            <div> @</div>
-            <input
+                    required
+                    value={lname}
+                    onChange={(e) => {
+                        setLname(e.target.value)
+                    }}
+                />
+                <div> @</div>
+                <input
 
-                type="email"
+                    type="email"
 
-                required
-                value={email}
-                onChange={(e) => {
-                    setEmail(e.target.value)
-                }}
-            />
-            <div> M.</div>
-            <input
+                    required
+                    value={email}
+                    onChange={(e) => {
+                        setEmail(e.target.value)
+                    }}
+                />
+                <div> M.</div>
+                <input
 
-                type="number"
+                    type="number"
 
-                required
-                value={age}
-                onChange={(e) => {
-                    setAge(e.target.value)
-                }}
-            />
-            <button onClick={props.click}> Atmesti</button>
-            <button onClick={props.click}> Atnaujinti duomenis </button>
+                    required
+                    value={age}
+                    onChange={(e) => {
+                        setAge(e.target.value)
+                    }}
+                />
 
-        </div>
-        )
+
+
+
+                {!isEditing ? <button onClick={() => handleEdit(userId)}> Atnaujinti dalyvio duomenis</button> :
+                    <button type="submit" disabled> Duomenys išsaugomi...</button>}
+
+
+
+
+
+            </div> : <p> Pavyko !</p>}
+            {/* {isUpdated && <button> Išsaugota! Uždaryti</button>} */}
+            {!isUpdated ? <button onClick={props.click}> Atmesti</button> : ''}
+        </div >
+    )
 }
 
