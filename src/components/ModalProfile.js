@@ -9,9 +9,22 @@ export default function Modal(props) {
     const [lname, setLname] = useState(props.lname)
     const [email, setEmail] = useState(props.email)
     const [age, setAge] = useState()
+    const [isPending, setIsPending] = useState(false)
+    const [modalOn, setModalOn] = useState(false)
 
- 
+    function cancel() {
+        setModalOn(false)
+        return
+    }
 
+    // function showModal() {
+    //     if (!modalOn) {
+    //         setModalOn(true)
+    //     }
+    //     else {
+    //         setModalOn(false)
+    //     }
+    // }
 
     return (
         <div className="modal">
@@ -62,6 +75,7 @@ export default function Modal(props) {
             <button onClick={props.click}> Atmesti</button>
             <button onClick={props.click}> Atnaujinti duomenis </button>
 
-        </div>)
+        </div>
+        )
 }
 

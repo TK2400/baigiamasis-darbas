@@ -1,0 +1,26 @@
+.modal {
+  text-align: center; 
+  border-radius: 10px;
+ 
+    z-index: 1; 
+    padding: 25px; 
+    left: auto;
+    right:auto;
+    top: 50px;
+    width: 100%; 
+    height: auto; 
+    overflow: auto; 
+    background-color: rgb(170, 197, 170, 0.9);
+    color: black;
+    box-shadow: 5px 5px 18px 5px rgba(0,0,0,0.57);
+      }
+  
+.modal img {     
+    
+    background-color: rgb(170, 197, 170, 0.9);
+    }
+
+.modal p:last-child {
+  text-align: left;
+  margin-bottom: 10px;
+} 

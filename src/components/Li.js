@@ -5,7 +5,9 @@ import ModalProfile from "./ModalProfile"
 export default function Li(props) {
     const { index, list, setList, userId, email, nameShort, name, lname, age, setName } = props
     const [buttonClicked, setButtonClicked] = useState(false)
+    const [editButtonClicked, setEditButtonClicked] = useState(false)
     const [isPending, setIsPending] = useState(false)
+
 
     function showMore() {
         if (!buttonClicked) {
@@ -14,9 +16,16 @@ export default function Li(props) {
         else { setButtonClicked(false) }
     }
 
+    function showModal() {
+        if (!editButtonClicked) {
+            setEditButtonClicked(true)
+        }
+        else { setEditButtonClicked(false) }
+    }
+
+
     function handleDelete(id) {
         setIsPending(true)
-
 
         fetch(`http://127.0.0.1:9000/users/${id}`, {
             method: 'DELETE'
@@ -89,7 +98,15 @@ export default function Li(props) {
                 {isPending && ""}
 
 
-                <ModalProfile
+
+
+
+                {!isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId, index)}>Istrinti dalyvi</button>}
+                {isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId, index)} disabled> Dalyvis trinamas... </button>}
+
+                <button style={{ marginTop: "10px" }} onClick={showModal}> Redaguoti dalyvio duomenis </button>
+
+                {editButtonClicked && <ModalProfile
                     list={list}
                     key={index + name}
                     userId={userId}
@@ -102,10 +119,7 @@ export default function Li(props) {
                     age={age}
                     setList={setList} />
 
-
-                {!isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId, index)}>Istrinti dalyvi</button>}
-                {isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId, index)} disabled> Dalyvis trinamas... </button>}
-            </div>
+                }</div>
 
 
 
