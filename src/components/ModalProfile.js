@@ -1,4 +1,4 @@
-import { setTimeout, useState } from 'react'
+import { useState } from 'react'
 import './modal.css'
 
 
@@ -10,8 +10,8 @@ export default function Modal(props) {
     const [age, setAge] = useState(props.age)
     const [isEditing, setIsEditing] = useState(false)
     const [isUpdated, setIsUpdated] = useState(false)
-const [timeout, setTimeout]=useState(0)
-    
+    // const [timeout, setTimeout] = useState(0)
+
 
 
 
@@ -22,6 +22,10 @@ const [timeout, setTimeout]=useState(0)
 
 
     const userId = props.userId
+
+    const click = props.click
+    console.log(click)
+
 
     function handleEdit(id) {
         const form = { name, lname, email, age }
@@ -35,82 +39,64 @@ const [timeout, setTimeout]=useState(0)
             body: JSON.stringify(form)
         }).then(() => {
             setIsEditing(false)
-            setTimeout(function () {
-                setIsUpdated(true)
-            }, 3000);
+            setIsUpdated(true)
+
 
         }).catch((error) => {
             console.log(error.message)
         })
-
-
-
-
-
-
 
     }
 
 
     return (
         <div className="modal">
-            {!isUpdated ? <div>
-                <div> V.</div>
-                <input
+            {!isUpdated ?
+                <div>
+                    <div> V.</div>
+                    <input
+                        type="text"
+                        required
+                        value={name}
+                        onChange={(e) => {
+                            setName(e.target.value)
+                        }}
+                    />
+                    <div> P.</div>
+                    <input
+                        type="text"
+                        required
+                        value={lname}
+                        onChange={(e) => {
+                            setLname(e.target.value)
+                        }}
+                    />
+                    <div> @</div>
+                    <input
+                        type="email"
+                        required
+                        value={email}
+                        onChange={(e) => {
+                            setEmail(e.target.value)
+                        }}
+                    />
+                    <div> M.</div>
+                    <input
+                        type="number"
+                        required
+                        value={age}
+                        onChange={(e) => {
+                            setAge(e.target.value)
+                        }}
+                    />
 
-                    type="text"
-
-                    required
-                    value={name}
-                    onChange={(e) => {
-                        setName(e.target.value)
-                    }}
-                />
-                <div> P.</div>
-                <input
-
-                    type="text"
-
-                    required
-                    value={lname}
-                    onChange={(e) => {
-                        setLname(e.target.value)
-                    }}
-                />
-                <div> @</div>
-                <input
-
-                    type="email"
-
-                    required
-                    value={email}
-                    onChange={(e) => {
-                        setEmail(e.target.value)
-                    }}
-                />
-                <div> M.</div>
-                <input
-
-                    type="number"
-
-                    required
-                    value={age}
-                    onChange={(e) => {
-                        setAge(e.target.value)
-                    }}
-                />
-
-
-
-
-                {!isEditing ? <button onClick={() => handleEdit(userId)}> Atnaujinti dalyvio duomenis</button> :
-                    <button type="submit" disabled> Duomenys išsaugomi...</button>}
-
-
-
-
-
-            </div> : <p> Pavyko !</p>}
+                    {!isEditing ? <button onClick={() => handleEdit(userId)}> Atnaujinti dalyvio duomenis</button> :
+                        <button type="submit" disabled> Duomenys išsaugomi...</button>}
+                </div> :
+                <div>
+                    <p> Pavyko !</p>
+                    <button onClick={click}> X </button>
+                </div>}
             {/* {isUpdated && <button> Išsaugota! Uždaryti</button>} */}
             {!isUpdated ? <button onClick={props.click}> Atmesti</button> : ''}
         </div >

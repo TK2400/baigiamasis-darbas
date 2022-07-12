@@ -7,6 +7,7 @@ export default function Li(props) {
     const [buttonClicked, setButtonClicked] = useState(false)
     const [editButtonClicked, setEditButtonClicked] = useState(false)
     const [isPending, setIsPending] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
 
     function showMore() {
@@ -16,7 +17,7 @@ export default function Li(props) {
         else { setButtonClicked(false) }
     }
 
-    function showModal() {
+    function modalOn() {
         if (!editButtonClicked) {
             setEditButtonClicked(true)
         }
@@ -86,6 +87,10 @@ export default function Li(props) {
     //     });
     // };
 
+    // function closeModal() {
+    //     return !editButtonClicked
+    // }
+
 
     return (
         <li key={index}>
@@ -99,7 +104,7 @@ export default function Li(props) {
 
 
 
-                {!editButtonClicked && <button style={{ marginTop: "10px" }} onClick={showModal}> Redaguoti dalyvio duomenis </button>}
+                {!editButtonClicked && <button style={{ marginTop: "10px" }} onClick={modalOn}> Redaguoti dalyvio duomenis </button>}
 
                 {!isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId)}>Istrinti dalyvi</button>}
                 {isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId)} disabled> Dalyvis trinamas... </button>}
@@ -107,11 +112,11 @@ export default function Li(props) {
 
 
                 {editButtonClicked && <ModalProfile
+                    click={() => setEditButtonClicked(false)}
                     list={list}
                     key={index + name}
                     userId={userId}
                     index={index}
-
                     name={name}
                     setName={setName}
                     lname={lname}
