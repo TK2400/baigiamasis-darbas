@@ -150,6 +150,8 @@ export default function PostRegistrationForm() {
                             email={user.email}
                             age={user.age}
                             setList={setList}
+                            setName={setName}
+                            setLname={setLname}
                             // ondelete={onDelete}
                         />
 

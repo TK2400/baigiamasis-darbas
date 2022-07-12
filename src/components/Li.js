@@ -1,8 +1,9 @@
 import { useState } from "react"
+import ModalProfile from "./ModalProfile"
 
 
 export default function Li(props) {
-    const { index, list, setList, userId, email, nameShort, name, lname, age } = props
+    const { index, list, setList, userId, email, nameShort, name, lname, age, setName } = props
     const [buttonClicked, setButtonClicked] = useState(false)
     const [isPending, setIsPending] = useState(false)
 
@@ -82,10 +83,25 @@ export default function Li(props) {
             {!buttonClicked && <div className="showMore"> {nameShort}. {lname}</div>}
             {buttonClicked && <div className="showMore">  {name} {lname}, {email}, amzius {age}m.</div>}
             <div className="buttonHolder">
-                {!isPending&& <button onClick={showMore}>
+                {!isPending && <button onClick={showMore}>
                     {buttonClicked ? "Mažiau" : "Daugiau"}
                 </button>}
-                {isPending&& ""}
+                {isPending && ""}
+
+
+                <ModalProfile
+                    list={list}
+                    key={index + name}
+                    userId={userId}
+                    index={index}
+
+                    name={name}
+                    setName={setName}
+                    lname={lname}
+                    email={email}
+                    age={age}
+                    setList={setList} />
+
 
                 {!isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId, index)}>Istrinti dalyvi</button>}
                 {isPending && <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId, index)} disabled> Dalyvis trinamas... </button>}
