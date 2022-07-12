@@ -7,9 +7,7 @@ export default function Li(props) {
     const [buttonClicked, setButtonClicked] = useState(false)
     const [editButtonClicked, setEditButtonClicked] = useState(false)
     const [isPending, setIsPending] = useState(false)
-    const [showModal, setShowModal] = useState(false)
-
-
+  
     function showMore() {
         if (!buttonClicked) {
             setButtonClicked(true)

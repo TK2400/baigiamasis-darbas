@@ -10,22 +10,9 @@ export default function Modal(props) {
     const [age, setAge] = useState(props.age)
     const [isEditing, setIsEditing] = useState(false)
     const [isUpdated, setIsUpdated] = useState(false)
-    // const [timeout, setTimeout] = useState(0)
-
-
-
-
-    // function cancel() {
-    //     setIsEditing(false)
-    //     return
-    // }
-
 
     const userId = props.userId
-
     const click = props.click
-    console.log(click)
-
 
     function handleEdit(id) {
         const form = { name, lname, email, age }
@@ -41,13 +28,10 @@ export default function Modal(props) {
             setIsEditing(false)
             setIsUpdated(true)
 
-
         }).catch((error) => {
             console.log(error.message)
         })
-
     }
-
 
     return (
         <div className="modal">
@@ -89,13 +73,12 @@ export default function Modal(props) {
                             setAge(e.target.value)
                         }}
                     />
-
                     {!isEditing ? <button onClick={() => handleEdit(userId)}> Atnaujinti dalyvio duomenis</button> :
                         <button type="submit" disabled> Duomenys išsaugomi...</button>}
                 </div> :
                 <div>
-                    <p> Pavyko !</p>
-                    <button onClick={click}> X </button>
+                    <span> Dalyvio {name} {lname} duomenys sėkmingai atnaujinti </span>
+                    <button onClick={click}> Uždaryti </button>
                 </div>}
             {/* {isUpdated && <button> Išsaugota! Uždaryti</button>} */}
             {!isUpdated ? <button onClick={props.click}> Atmesti</button> : ''}
