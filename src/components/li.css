@@ -1,7 +1,6 @@
 .liHolder {
-    
+    z-index: 0;
 }
-
 
 .icon {
     width: 20px;
@@ -23,4 +22,8 @@
    font-weight:500;
    margin-bottom: 5px;
     
+}
+
+li button {
+    background-color: rgb(248, 241, 232);
 }

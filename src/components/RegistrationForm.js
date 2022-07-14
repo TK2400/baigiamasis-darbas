@@ -5,8 +5,6 @@ import Li from './Li'
 
 
 
-
-
 export default function PostRegistrationForm() {
     const [name, setName] = useState('')
     const [lname, setLname] = useState('')
@@ -14,6 +12,7 @@ export default function PostRegistrationForm() {
     const [age, setAge] = useState('')
     const [isPending, setIsPending] = useState(false)
     const [list, setList] = useState([])
+    const [error, setError] = useState(null)
 
     // const [buttonClicked, setButtonClicked] = useState(false)
 

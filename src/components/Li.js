@@ -1,9 +1,10 @@
 import { useState } from "react"
-import ModalProfile from "./ModalProfile"
+import Modal from "./Modal"
 import './li.css'
 import More from "./more.svg"
 import Edit from "./edit.svg"
 import Delete from "./delete.svg"
+
 
 
 export default function Li(props) {
@@ -45,7 +46,7 @@ const editData = <img src={Edit} className='icon' alt='edit' />
 const delData = <img src={Delete} className='icon' alt='delete' />
 
 
-    return (
+    return  (
         <div className="liHolder">
 
 
@@ -69,7 +70,7 @@ const delData = <img src={Delete} className='icon' alt='delete' />
 
                 </div>
             </li>
-            {editButtonClicked && <ModalProfile
+            {editButtonClicked && <Modal
                 click={() => setEditButtonClicked(false)}
                 list={list}
                 key={index + name}
@@ -83,6 +84,7 @@ const delData = <img src={Delete} className='icon' alt='delete' />
                 setList={setList} />
             }
         </div>
+        
     )
 }
 
