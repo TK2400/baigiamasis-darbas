@@ -10,6 +10,7 @@ export default function Modal(props) {
     const [age, setAge] = useState(props.age)
     const [isEditing, setIsEditing] = useState(false)
     const [isUpdated, setIsUpdated] = useState(false)
+    const [error, setError] = useState(null)
 
     const userId = props.userId
     const click = props.click
@@ -81,7 +82,8 @@ export default function Modal(props) {
                     <button onClick={click}> Uždaryti </button>
                 </div>}
             {/* {isUpdated && <button> Išsaugota! Uždaryti</button>} */}
-            {!isUpdated ? <button onClick={props.click}> Atmesti</button> : ''}
+            {!isUpdated && <div className='cancelBtn'>
+                <button onClick={props.click}>Atmesti</button> </div>}
         </div >
     )
 }

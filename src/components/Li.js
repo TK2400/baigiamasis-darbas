@@ -1,14 +1,20 @@
 import { useState } from "react"
 import ModalProfile from "./ModalProfile"
+import './li.css'
+import More from "./more.svg"
+import Edit from "./edit.svg"
+import Delete from "./delete.svg"
+
 
 export default function Li(props) {
     const { index, list, setList, userId, email, nameShort, name, lname, age, setName } = props
     const [buttonClicked, setButtonClicked] = useState(false)
     const [editButtonClicked, setEditButtonClicked] = useState(false)
     const [isPending, setIsPending] = useState(false)
-  
-    const showMore=()=>!buttonClicked? setButtonClicked(true): setButtonClicked(false)
-    const modalOn=()=> !editButtonClicked?setEditButtonClicked(true): setEditButtonClicked(false)
+    const [error, setError] = useState(null)
+
+    const showMore = () => !buttonClicked ? setButtonClicked(true) : setButtonClicked(false)
+    const modalOn = () => !editButtonClicked ? setEditButtonClicked(true) : setEditButtonClicked(false)
 
     function handleDelete(id) {
         setIsPending(true)
@@ -19,7 +25,7 @@ export default function Li(props) {
             setButtonClicked(true)
             console.log(res)
             if (!res.ok) {
-                throw Error("could not fetch!")
+                throw Error("nėra atsakymo iš serverio :(")
             } else {
                 setButtonClicked(false)
                 const newList = list
@@ -28,39 +34,55 @@ export default function Li(props) {
                 setIsPending(false)
             }
         })
-            .catch((error) => {
-                alert(error)
+            .catch((err) => {
+                setError(err.message)
             });
     }
 
+const more = <img src={More} className='icon' alt='more' />
+const less =<img src={More} className='icon' alt='more' />
+const editData = <img src={Edit} className='icon' alt='edit' />
+const delData = <img src={Delete} className='icon' alt='delete' />
+
+
     return (
-        <li key={index}>
-            {!buttonClicked?<div className="showMore"> {nameShort}. {lname}</div>:
-            <div className="showMore">  {name} {lname}, {email}, amzius {age}m.</div>}
+        <div className="liHolder">
 
-            <div className="buttonHolder">
-                {!isPending? <button onClick={showMore}> {buttonClicked ? "Mažiau" : "Daugiau"}</button>:
-                isPending && ""}
 
-                {!editButtonClicked && <button style={{ marginTop: "10px" }} onClick={modalOn}> Redaguoti dalyvio duomenis </button>}
+            {error && <div> {error} </div>}
 
-                {!isPending ? <button style={{ marginTop: "10px" }} onClick={() => handleDelete(userId)}>Istrinti dalyvi</button>:
-                <button style={{ marginTop: "10px" }} disabled> Dalyvis trinamas... </button>}
+            <li key={index}>
 
-                {editButtonClicked && <ModalProfile
-                    click={() => setEditButtonClicked(false)}
-                    list={list}
-                    key={index + name}
-                    userId={userId}
-                    index={index}
-                    name={name}
-                    setName={setName}
-                    lname={lname}
-                    email={email}
-                    age={age}
-                    setList={setList} />
-                }</div>
-        </li>
+                {!buttonClicked ? <div className="showMore"> <p>{nameShort}. {lname}</p></div> :
+                    <div className="showMore"> <p>{name} {lname}, {email}, amzius {age}m.</p> </div>}
+
+                <div className="buttonHolder">
+
+                    {!isPending ? <button onClick={showMore}>
+                        {buttonClicked ?  more : less}
+                    </button> : isPending && ""}
+
+                    {!editButtonClicked && <button onClick={modalOn}> {editData} </button>}
+
+                    {!isPending ? <button onClick={() => handleDelete(userId)}>{delData}</button> :
+                        <button disabled> Dalyvis trinamas... </button>}
+
+                </div>
+            </li>
+            {editButtonClicked && <ModalProfile
+                click={() => setEditButtonClicked(false)}
+                list={list}
+                key={index + name}
+                userId={userId}
+                index={index}
+                name={name}
+                setName={setName}
+                lname={lname}
+                email={email}
+                age={age}
+                setList={setList} />
+            }
+        </div>
     )
 }
 

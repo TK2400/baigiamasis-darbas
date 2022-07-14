@@ -1,0 +1,26 @@
+.liHolder {
+    
+}
+
+
+.icon {
+    width: 20px;
+    height: 20px;
+    
+}
+
+.buttonHolder {
+    display: flex;
+        }
+
+.buttonHolder button{
+    margin: 5px;
+    padding: 5px
+    
+}
+
+.showMore p{
+   font-weight:500;
+   margin-bottom: 5px;
+    
+}

@@ -28,3 +28,9 @@ input[type=submit]:hover {
     margin-left: auto;
     margin-right: auto;
 }
+
+.userHolder {
+    width: 90%;
+        margin-left: auto;
+    margin-right: auto;
+}
