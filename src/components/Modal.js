@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import './modal.css'
-import ReactDom from "react-dom"
 import Edit from "./edit.svg"
 import Delete from "./delete.svg"
 
@@ -13,11 +12,15 @@ export default function Modal(props) {
     const [age, setAge] = useState(props.age)
     const [isEditing, setIsEditing] = useState(false)
     const [isUpdated, setIsUpdated] = useState(false)
-    const [error, setError] = useState(null)
+    // const [error, setError] = useState(null)
 
     const userId = props.userId
     const click = props.click
-
+    const list = props.list
+ 
+    const setList = props.list
+    const index = props.index
+  
     const editData = <img src={Edit} className='icon' alt='edit' />
     const delData = <img src={Delete} className='icon' alt='delete' />
 
@@ -33,6 +36,10 @@ export default function Modal(props) {
             body: JSON.stringify(form)
         }).then(() => {
             setIsEditing(false)
+            const newList = list
+            newList.splice(index, 1, form)
+            console.log(newList)
+            setList([...newList])
             setIsUpdated(true)
 
         }).catch((error) => {

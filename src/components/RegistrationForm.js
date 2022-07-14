@@ -12,9 +12,15 @@ export default function PostRegistrationForm() {
     const [age, setAge] = useState('')
     const [isPending, setIsPending] = useState(false)
     const [list, setList] = useState([])
-    const [error, setError] = useState(null)
+    // const [error, setError] = useState(null)
 
     // const [buttonClicked, setButtonClicked] = useState(false)
+
+    function updateList(gotIdNumber) {
+        console.log(gotIdNumber)
+        const updatedList = list.filter((el) => (el._id !== gotIdNumber))
+        setList(updatedList)
+    }
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -72,16 +78,15 @@ export default function PostRegistrationForm() {
 
                 <input
                     placeholder="el.pastas"
-                    type="text"
+                    type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
 
                 <input
-
                     placeholder="amzius m."
-                    type="text"
+                    type="number"
                     required
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
@@ -93,31 +98,22 @@ export default function PostRegistrationForm() {
             <div className='userHolder'>
                 <ol>
                     {list.map((user, index) => (
-
                         <Li
                             list={list}
                             key={index + name}
                             userId={user._id}
                             index={index}
-                            nameShort={user.name[0]}
+                            // nameShort={user.name[0]}
                             name={user.name}
                             lname={user.lname}
                             email={user.email}
                             age={user.age}
-                            setList={setList}
-                            setName={setName}
-                            setLname={setLname}
-                        // ondelete={onDelete}
+                            updateList={updateList}
                         />
-
-
-
-
                     ))}
                 </ol>
             </div>
         </div >
-
     )
 }
 

@@ -8,7 +8,7 @@ import Delete from "./delete.svg"
 
 
 export default function Li(props) {
-    const { index, list, setList, userId, email, nameShort, name, lname, age, setName } = props
+    const { index, list, updateList, userId, email, nameShort, name, lname, age } = props
     const [buttonClicked, setButtonClicked] = useState(false)
     const [editButtonClicked, setEditButtonClicked] = useState(false)
     const [isPending, setIsPending] = useState(false)
@@ -18,6 +18,7 @@ export default function Li(props) {
     const modalOn = () => !editButtonClicked ? setEditButtonClicked(true) : setEditButtonClicked(false)
 
     function handleDelete(id) {
+
         setIsPending(true)
 
         fetch(`http://127.0.0.1:9000/users/${id}`, {
@@ -29,9 +30,8 @@ export default function Li(props) {
                 throw Error("nėra atsakymo iš serverio :(")
             } else {
                 setButtonClicked(false)
-                const newList = list
-                newList.splice(index, 1)
-                setList([...newList])
+                updateList(id)
+
                 setIsPending(false)
             }
         })
@@ -40,13 +40,13 @@ export default function Li(props) {
             });
     }
 
-const more = <img src={More} className='icon' alt='more' />
-const less =<img src={More} className='icon' alt='more' />
-const editData = <img src={Edit} className='icon' alt='edit' />
-const delData = <img src={Delete} className='icon' alt='delete' />
+    const more = <img src={More} className='icon' alt='more' />
+    const less = <img src={More} className='icon' alt='more' />
+    const editData = <img src={Edit} className='icon' alt='edit' />
+    const delData = <img src={Delete} className='icon' alt='delete' />
 
 
-    return  (
+    return (
         <div className="liHolder">
 
 
@@ -60,7 +60,7 @@ const delData = <img src={Delete} className='icon' alt='delete' />
                 <div className="buttonHolder">
 
                     {!isPending ? <button onClick={showMore}>
-                        {buttonClicked ?  more : less}
+                        {buttonClicked ? more : less}
                     </button> : isPending && ""}
 
                     {!editButtonClicked && <button onClick={modalOn}> {editData} </button>}
@@ -77,14 +77,13 @@ const delData = <img src={Delete} className='icon' alt='delete' />
                 userId={userId}
                 index={index}
                 name={name}
-                setName={setName}
                 lname={lname}
                 email={email}
                 age={age}
-                setList={setList} />
+            />
             }
         </div>
-        
+
     )
 }
 
