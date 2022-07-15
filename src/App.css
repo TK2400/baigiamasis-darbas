@@ -9,3 +9,14 @@ body {
     background-color: #eaeaea;
   
   }
+
+  @media (min-width: 1200px) {
+    .container {
+        width: 1000px
+    }
+
+    .body {
+      width: 90%
+  }
+  
+  }

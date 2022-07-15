@@ -34,3 +34,23 @@ input[type=submit]:hover {
     margin-left: auto;
     margin-right: auto;
 }
+
+.error {
+    text-align: center;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    height:auto;
+    background-color: red;
+    color: black;
+    font-weight: 800;
+  }
+  .error p{
+    padding: 20px;
+    margin:10px 
+  }
+
+  .error button{
+    width: 30px;
+    margin-bottom:10px 
+  }

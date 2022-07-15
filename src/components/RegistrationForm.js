@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './registrationForm.css'
 // import PartcipantList from './ParticipantList'
 import Li from './Li'
+import Delete from "./delete.svg"
 
 
 
@@ -12,6 +13,9 @@ export default function PostRegistrationForm() {
     const [age, setAge] = useState('')
     const [isPending, setIsPending] = useState(false)
     const [list, setList] = useState([])
+    const [repeatedEmail, setRepeatedEmail] = useState(false)
+    const delData = <img src={Delete} className='icon' alt='delete' />
+
 
     function deleteFromList(gotIdNumber) {
         const deletedList = list.filter((el) => (el._id !== gotIdNumber))
@@ -28,6 +32,14 @@ export default function PostRegistrationForm() {
 
     function handleSubmit(e) {
         e.preventDefault()
+        const result = (element) => (element.email === email)
+
+        if (list.some(result)) {
+            setRepeatedEmail(true)
+        } else {
+            setRepeatedEmail(false)
+            return
+        }
         const form = { name, lname, email, age }
         setName('')
         setLname('')
@@ -49,6 +61,9 @@ export default function PostRegistrationForm() {
     }
 
     useEffect(() => {
+        setTimeout(function () {
+            setRepeatedEmail(false)
+        }, 3000);
         fetch("http://127.0.0.1:9000/users")
             .then((resp) => resp.json())
             .then((data) => {
@@ -59,8 +74,17 @@ export default function PostRegistrationForm() {
             })
     }, [])
 
+
+
+
+
+
+
+
+
     return (
         <div className='formHolder'>
+
             <form onSubmit={handleSubmit}>
                 <input
                     placeholder="Vardas"
@@ -92,6 +116,11 @@ export default function PostRegistrationForm() {
                 />
                 {!isPending && <input type="submit" value="Užregistruoti asmenį į egzaminą" />}
                 {isPending && <input type="submit" disabled value="Kraunama..." />}
+                {repeatedEmail && <div className='error'>
+                    <p> Dalyvis su tokiu e.pašto adresu jau yra!</p>
+                    <button onClick={() => setRepeatedEmail(false)}> {delData}</button>
+                </div>}
+
             </form>
             <div className='userHolder'>
                 <ol>
