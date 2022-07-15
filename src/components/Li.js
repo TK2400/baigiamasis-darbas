@@ -8,11 +8,13 @@ import Delete from "./delete.svg"
 
 
 export default function Li(props) {
-    const { index, list, updateList, userId, email, nameShort, name, lname, age } = props
+    const { index, list, updateList, deleteFromList, userId, email, nameShort, name, lname, age } = props
     const [buttonClicked, setButtonClicked] = useState(false)
     const [editButtonClicked, setEditButtonClicked] = useState(false)
     const [isPending, setIsPending] = useState(false)
     const [error, setError] = useState(null)
+
+
 
     const showMore = () => !buttonClicked ? setButtonClicked(true) : setButtonClicked(false)
     const modalOn = () => !editButtonClicked ? setEditButtonClicked(true) : setEditButtonClicked(false)
@@ -30,7 +32,7 @@ export default function Li(props) {
                 throw Error("nėra atsakymo iš serverio :(")
             } else {
                 setButtonClicked(false)
-                updateList(id)
+                deleteFromList(id)
 
                 setIsPending(false)
             }
@@ -80,6 +82,7 @@ export default function Li(props) {
                 lname={lname}
                 email={email}
                 age={age}
+                updateList={updateList}
             />
             }
         </div>

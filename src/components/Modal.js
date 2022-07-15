@@ -6,6 +6,7 @@ import Delete from "./delete.svg"
 
 
 export default function Modal(props) {
+    // const [list, setList] = useState(props.list)
     const [name, setName] = useState(props.name)
     const [lname, setLname] = useState(props.lname)
     const [email, setEmail] = useState(props.email)
@@ -14,34 +15,40 @@ export default function Modal(props) {
     const [isUpdated, setIsUpdated] = useState(false)
     // const [error, setError] = useState(null)
 
+
     const userId = props.userId
     const click = props.click
-    const list = props.list
- 
-    const setList = props.list
+    // const list = props.list
+    const updateList = props.updateList
     const index = props.index
-  
+
     const editData = <img src={Edit} className='icon' alt='edit' />
     const delData = <img src={Delete} className='icon' alt='delete' />
 
     function handleEdit(id) {
+        console.log(id)
         const form = { name, lname, email, age }
+        // form._id = id
+
         setIsEditing(true)
         setIsUpdated(false)
+
+        // console.log(index)
+        // console.log(form)
 
         fetch(`http://127.0.0.1:9000/user/${id}`, {
             method: 'PUT',
             mode: 'cors',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(form)
-        }).then(() => {
-            setIsEditing(false)
-            const newList = list
-            newList.splice(index, 1, form)
-            console.log(newList)
-            setList([...newList])
-            setIsUpdated(true)
-
+        }).then((res) => {
+            if (!res.ok) {
+                throw Error("nėra atsakymo iš serverio :(")
+            } else {
+                setIsEditing(false)
+                updateList(index, form, id)
+                setIsUpdated(true)
+            }
         }).catch((error) => {
             console.log(error.message)
         })

@@ -16,15 +16,25 @@ export default function PostRegistrationForm() {
 
     // const [buttonClicked, setButtonClicked] = useState(false)
 
-    function updateList(gotIdNumber) {
-        console.log(gotIdNumber)
-        const updatedList = list.filter((el) => (el._id !== gotIdNumber))
-        setList(updatedList)
+    function deleteFromList(gotIdNumber) {
+        const deletedList = list.filter((el) => (el._id !== gotIdNumber))
+        setList(deletedList)
     }
+
+    function updateList(index, form) {
+        list[index].name = form.name
+        list[index].lname = form.lname
+        list[index].email = form.email
+        list[index].age = form.age
+        setList([...list])
+    }
+
+
 
     function handleSubmit(e) {
         e.preventDefault()
         const form = { name, lname, email, age }
+        console.log(form)
 
         setIsPending(true)
         setName('')
@@ -103,11 +113,12 @@ export default function PostRegistrationForm() {
                             key={index + name}
                             userId={user._id}
                             index={index}
-                            // nameShort={user.name[0]}
+                            nameShort={user.name[0]}
                             name={user.name}
                             lname={user.lname}
                             email={user.email}
                             age={user.age}
+                            deleteFromList={deleteFromList}
                             updateList={updateList}
                         />
                     ))}
