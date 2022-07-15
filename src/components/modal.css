@@ -3,9 +3,10 @@
   border-radius: 5px;
  
     position: relative;
+    margin-top: 4px;
     padding: 10px; 
   
-    top: -40px;
+    top: -45px;
     width: 100%; 
     height: auto; 
     overflow: auto; 
@@ -24,6 +25,19 @@
  
 }
 
+.error {
+  text-align: center;
+  width: 500px;
+  height:auto;
+  background-color: red;
+  color: black;
+  font-weight: 800;
+}
+.error p{
+  padding: 20px;
+  margin:10px 
+}
+
 
 .input {
   display: flex;
@@ -36,3 +50,16 @@
   background-color: rgb(248, 241, 232);
 }
 
+.answer {
+  width: 90%;
+  text-align: center;
+ }
+
+.answer span {
+  margin-top: 10px;
+  font-size: medium;
+ }
+.answer button {
+  margin-top: 20px;
+  margin-bottom: 10px;
+ }

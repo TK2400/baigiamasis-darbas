@@ -12,9 +12,6 @@ export default function PostRegistrationForm() {
     const [age, setAge] = useState('')
     const [isPending, setIsPending] = useState(false)
     const [list, setList] = useState([])
-    // const [error, setError] = useState(null)
-
-    // const [buttonClicked, setButtonClicked] = useState(false)
 
     function deleteFromList(gotIdNumber) {
         const deletedList = list.filter((el) => (el._id !== gotIdNumber))
@@ -29,18 +26,14 @@ export default function PostRegistrationForm() {
         setList([...list])
     }
 
-
-
     function handleSubmit(e) {
         e.preventDefault()
         const form = { name, lname, email, age }
-        console.log(form)
-
-        setIsPending(true)
         setName('')
         setLname('')
         setEmail('')
         setAge('')
+        setIsPending(true)
 
         fetch('http://127.0.0.1:9000/users', {
             method: 'POST',
@@ -66,7 +59,6 @@ export default function PostRegistrationForm() {
             })
     }, [])
 
-
     return (
         <div className='formHolder'>
             <form onSubmit={handleSubmit}>
@@ -77,7 +69,6 @@ export default function PostRegistrationForm() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-
                 <input
                     placeholder="Pavarde"
                     type="text"
@@ -85,7 +76,6 @@ export default function PostRegistrationForm() {
                     value={lname}
                     onChange={(e) => setLname(e.target.value)}
                 />
-
                 <input
                     placeholder="el.pastas"
                     type="email"
@@ -93,7 +83,6 @@ export default function PostRegistrationForm() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-
                 <input
                     placeholder="amzius m."
                     type="number"
@@ -103,7 +92,6 @@ export default function PostRegistrationForm() {
                 />
                 {!isPending && <input type="submit" value="Užregistruoti asmenį į egzaminą" />}
                 {isPending && <input type="submit" disabled value="Kraunama..." />}
-
             </form>
             <div className='userHolder'>
                 <ol>

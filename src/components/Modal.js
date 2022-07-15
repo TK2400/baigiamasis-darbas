@@ -6,19 +6,16 @@ import Delete from "./delete.svg"
 
 
 export default function Modal(props) {
-    // const [list, setList] = useState(props.list)
     const [name, setName] = useState(props.name)
     const [lname, setLname] = useState(props.lname)
     const [email, setEmail] = useState(props.email)
     const [age, setAge] = useState(props.age)
     const [isEditing, setIsEditing] = useState(false)
     const [isUpdated, setIsUpdated] = useState(false)
-    // const [error, setError] = useState(null)
-
+    const [error, setError] = useState(null)
 
     const userId = props.userId
     const click = props.click
-    // const list = props.list
     const updateList = props.updateList
     const index = props.index
 
@@ -26,15 +23,10 @@ export default function Modal(props) {
     const delData = <img src={Delete} className='icon' alt='delete' />
 
     function handleEdit(id) {
-        console.log(id)
         const form = { name, lname, email, age }
-        // form._id = id
 
         setIsEditing(true)
         setIsUpdated(false)
-
-        // console.log(index)
-        // console.log(form)
 
         fetch(`http://127.0.0.1:9000/user/${id}`, {
             method: 'PUT',
@@ -50,13 +42,14 @@ export default function Modal(props) {
                 setIsUpdated(true)
             }
         }).catch((error) => {
-            console.log(error.message)
+            setError(error.message)
         })
     }
 
-    return (
+        return (
 
         <div className="modal" id="modal">
+            {error && <div className='error'> <p>{error}</p> </div>}
             {!isUpdated ?
                 <div className='modalForm'>
                     <div className='input'> V. <input
@@ -98,11 +91,10 @@ export default function Modal(props) {
                     {!isEditing ? <button onClick={() => handleEdit(userId)}> {editData}</button> :
                         <button type="submit" disabled> Duomenys išsaugomi...</button>}
                 </div> :
-                <div>
+                <div className='answer'>
                     <span> Dalyvio {name} {lname} duomenys sėkmingai atnaujinti </span>
-                    <button onClick={click}> Uždaryti </button>
+                    <button onClick={click}> {delData} </button>
                 </div>}
-            {/* {isUpdated && <button> Išsaugota! Uždaryti</button>} */}
             {!isUpdated && <div className='cancelBtn'>
                 <button onClick={props.click}>{delData}</button> </div>}
         </div >
