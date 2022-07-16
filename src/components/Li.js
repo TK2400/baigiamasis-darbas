@@ -24,7 +24,6 @@ export default function Li(props) {
             method: 'DELETE'
         }).then((res) => {
             setButtonClicked(true)
-            console.log(res)
             if (!res.ok) {
                 throw Error("nėra atsakymo iš serverio :(")
             } else {
@@ -44,7 +43,7 @@ export default function Li(props) {
     const delData = <img src={Delete} className='icon' alt='delete' />
 
     return (
-        <div className="liHolder">
+        <div className="liHolder" >
             {error && <div className='error'> <p>{error}</p> </div>}
             <li key={index}>
                 {!buttonClicked ? <div className="showMore"> <p>{nameShort}. {lname}</p></div> :
@@ -55,7 +54,7 @@ export default function Li(props) {
                     </button> : isPending && ""}
                     {!editButtonClicked && <button onClick={modalOn}> {editData} </button>}
                     {!isPending ? <button onClick={() => handleDelete(userId)}>{delData}</button> :
-                        <button disabled> Dalyvis trinamas... </button>}
+                        <button disabled> <p>Dalyvis trinamas...</p> </button>}
                 </div>
             </li>
             {editButtonClicked && <Modal
