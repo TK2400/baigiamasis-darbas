@@ -47,7 +47,7 @@ export default function Li(props) {
             {error && <div className='error'> <p>{error}</p> </div>}
             <li key={index}>
                 {!buttonClicked ? <div className="showMore"> <p>{nameShort}. {lname}</p></div> :
-                    <div className="showMore"> <p>{name} {lname}, {email}, amzius {age}m.</p> </div>}
+                    <div className="showMore"> <p>{name} {lname}, {email}, amžius {age}m.</p> </div>}
                 <div className="buttonHolder">
                     {!isPending ? <button onClick={showMore}>
                         {buttonClicked ? more : less}

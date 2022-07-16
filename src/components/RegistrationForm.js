@@ -97,21 +97,21 @@ export default function PostRegistrationForm() {
                     onChange={(e) => setName(e.target.value)}
                 />
                 <input
-                    placeholder="Pavarde"
+                    placeholder="Pavardė"
                     type="text"
                     required
                     value={lname}
                     onChange={(e) => setLname(e.target.value)}
                 />
                 <input
-                    placeholder="el.pastas"
+                    placeholder="el.paštas"
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
-                    placeholder="amzius m."
+                    placeholder="amžius m."
                     type="number"
                     required
                     value={age}
