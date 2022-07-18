@@ -19,7 +19,6 @@ export default function Li(props) {
 
     function handleDelete(id) {
         setIsPending(true)
-
         fetch(`http://127.0.0.1:9000/users/${id}`, {
             method: 'DELETE'
         }).then((res) => {

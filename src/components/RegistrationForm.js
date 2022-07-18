@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import './registrationForm.css'
-// import PartcipantList from './ParticipantList'
 import Li from './Li'
 import Delete from "./delete.svg"
-
-
 
 export default function PostRegistrationForm() {
     const [name, setName] = useState('')
@@ -15,10 +12,7 @@ export default function PostRegistrationForm() {
     const [list, setList] = useState([])
     const [repeatedEmail, setRepeatedEmail] = useState(false)
 
-
-
     const delData = <img src={Delete} className='icon' alt='delete' />
-
 
     function deleteFromList(gotIdNumber) {
         const deletedList = list.filter((el) => (el._id !== gotIdNumber))
@@ -40,18 +34,12 @@ export default function PostRegistrationForm() {
         }
     }
 
-
     function handleSubmit(e) {
         e.preventDefault()
 
         if (checkEmailBeforeInsert()) {
             return
         }
-
-        // console.log(repeatedEmail)  
-        // if(repeatedEmail){
-        //     console.log("veikia")    
-        // } 
 
         const form = { name, lname, email, age }
         setName('')
@@ -66,6 +54,14 @@ export default function PostRegistrationForm() {
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(form)
         }).then(() => {
+            fetch("http://127.0.0.1:9000/users")
+                .then((resp) => resp.json())
+                .then((data) => {
+                 setList(data)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
             list.push(form)
             setIsPending(false)
         }).catch((error) => {
@@ -77,11 +73,13 @@ export default function PostRegistrationForm() {
         fetch("http://127.0.0.1:9000/users")
             .then((resp) => resp.json())
             .then((data) => {
+                console.log(data)
                 setList(data)
             })
             .catch((error) => {
                 console.log(error)
             })
+
     }, [])
 
 
